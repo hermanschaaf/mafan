@@ -55,7 +55,11 @@ pinyin
 
 Contributors:
 -----------
-Herman Schaaf [IronZebra.com](http://www.ironzebra.com) (Author)
+ * Herman Schaaf ([IronZebra.com](http://www.ironzebra.com)) (Author)
+
+Any contributions are very welcome! 
 
 
-Any contributions are welcome! A lot of this is being used on [ChineseLevel.com](http://www.ChineseLevel.com)
+Sites using this:
+-----------
+ * [ChineseLevel.com](http://www.ChineseLevel.com)
