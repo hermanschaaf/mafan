@@ -5,6 +5,10 @@ Some helpful functions for parsing or changing Chinese text
 import re
 from HTMLParser import HTMLParser
 
+from jianfan import jtof as tradify, ftoj as simplify
+to_traditional = tradify
+to_simplified = simplify
+
 english = re.compile('[\w\~\!\s\@\#\$\%\^\&\*\(\)]+')
 known_punctuation = u'／（）、，。：「」…。'
 
