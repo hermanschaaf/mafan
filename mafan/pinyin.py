@@ -11,7 +11,7 @@ PinyinToneMark = {
     4: u"\u00e0\u00f2\u00e8\u00ec\u00f9\u01dc\u01dc",
 }
 
-def decode_pinyin(s):
+def decode(s):
     """
     Converts text in the numbering format of pinyin ("ni3hao3") to text with the 
     appropriate tone marks ("nǐhǎo").

@@ -28,6 +28,14 @@ def contains_latin(unicode_string):
 
 def is_punctuation(word):
   """
-  Check if a string is among any of the common Chinese punctuation.
+  Check if a string is among any of the common Chinese punctuation marks.
   """
   return word in known_punctuation
+
+
+def has_punctuation(word):
+  """
+  Check if a string has any of the common Chinese punctuation marks.
+  """
+  # this could be more efficient
+  return any(is_punctuation(c) for c in word)
