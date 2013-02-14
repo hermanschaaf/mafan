@@ -1,1 +1,4 @@
 v0.1, 2013-02-14 -- Initial release.
+v0.1.1, 2013-02-14 -- Added a bunch of functions.
+v0.1.2, 2013-02-14 -- Added pinyin conversion.
+v0.1.3, 2013-02-14 -- Fixed MANIFEST.in for pip installation
