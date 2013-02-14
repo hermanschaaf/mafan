@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='mafan',
-    version='0.1.2',
+    version='0.1.4',
     author='Herman Schaaf',
     author_email='herman@ironzebra.com',
     packages=['mafan'],
