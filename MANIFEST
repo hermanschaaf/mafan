@@ -5,3 +5,5 @@ setup.py
 bin/convert.py
 mafan/__init__.py
 mafan/encoding.py
+mafan/pinyin.py
+mafan/text.py
