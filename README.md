@@ -95,7 +95,7 @@ settings
 Contributors:
 -----------
  * Herman Schaaf ([IronZebra.com](http://www.ironzebra.com)) (Author)
- * Thomas Roten ([hanzidentifier](https://github.com/tsroten/))
+ * Thomas Roten ([Github](https://github.com/tsroten/))
 
 Any contributions are very welcome! 
 
