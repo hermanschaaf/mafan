@@ -58,7 +58,7 @@ True
 
 You can also test whether sentences or documents use simplified characters, traditional characters, both or neither:
 
-    >>> import mafan
+```>>> import mafan
     >>> from mafan import text
     >>> text.is_simplified(u'这是麻烦啦')
     True
@@ -74,6 +74,7 @@ You can also test whether sentences or documents use simplified characters, trad
     True
     >>> text.identify(u'This is so mafan.') is mafan.NEITHER # or None
     True
+```
 
 The identification functionality is introduced as a very thin wrapper to Thomas Roten's [hanzidentifier](https://github.com/tsroten/hanzidentifier), which is included as part of mafan.
 
@@ -94,6 +95,7 @@ settings
 Contributors:
 -----------
  * Herman Schaaf ([IronZebra.com](http://www.ironzebra.com)) (Author)
+ * Thomas Roten ([hanzidentifier](https://github.com/tsroten/))
 
 Any contributions are very welcome! 
 
