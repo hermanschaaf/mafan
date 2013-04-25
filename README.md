@@ -59,22 +59,22 @@ True
 You can also test whether sentences or documents use simplified characters, traditional characters, both or neither:
 
 ```python
-    >>> import mafan
-    >>> from mafan import text
-    >>> text.is_simplified(u'这是麻烦啦')
-    True
-    >>> text.is_traditional(u'Hello,這是麻煩啦') # ignores non-chinese characters
-    True
+>>> import mafan
+>>> from mafan import text
+>>> text.is_simplified(u'这是麻烦啦')
+True
+>>> text.is_traditional(u'Hello,這是麻煩啦') # ignores non-chinese characters
+True
 
-    # Or done another way:
-    >>> text.identify(u'这是麻烦啦') is mafan.SIMPLIFIED
-    True
-    >>> text.identify(u'這是麻煩啦') is mafan.TRADITIONAL
-    True
-    >>> text.identify(u'这是麻烦啦! 這是麻煩啦') is mafan.BOTH
-    True
-    >>> text.identify(u'This is so mafan.') is mafan.NEITHER # or None
-    True
+# Or done another way:
+>>> text.identify(u'这是麻烦啦') is mafan.SIMPLIFIED
+True
+>>> text.identify(u'這是麻煩啦') is mafan.TRADITIONAL
+True
+>>> text.identify(u'这是麻烦啦! 這是麻煩啦') is mafan.BOTH
+True
+>>> text.identify(u'This is so mafan.') is mafan.NEITHER # or None
+True
 ```
 
 The identification functionality is introduced as a very thin wrapper to Thomas Roten's [hanzidentifier](https://github.com/tsroten/hanzidentifier), which is included as part of mafan.
