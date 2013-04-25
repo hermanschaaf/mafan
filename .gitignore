@@ -3,6 +3,7 @@
 .installed.cfg
 bin
 develop-eggs
+data
 dist
 downloads
 eggs

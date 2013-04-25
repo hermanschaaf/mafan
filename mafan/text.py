@@ -3,14 +3,27 @@
 Some helpful functions for parsing or changing Chinese text
 """
 import re
+import os
 import subprocess
 from HTMLParser import HTMLParser
+
+import jieba
+import jieba.posseg as pseg
+import settings
+
+if settings.TRADITIONAL_DICT:
+  print "Using traditional dictionary..."
+  _curpath=os.path.normpath( os.path.join( os.getcwd(), os.path.dirname(__file__) )  )
+  if os.path.exists(os.path.join(_curpath, 'data/dict.txt.big')):
+    jieba.set_dictionary('data/dict.txt.big')
+  else:
+    print "Warning: TRADITIONAL_DICT is enabled in settings, but the dictionary has not yet been downloaded. \n\nYou might want to try running download_data.py"
 
 from jianfan import jtof as tradify, ftoj as simplify
 to_traditional = tradify
 to_simplified = simplify
 
-english = re.compile('[\w\~\!\s\@\#\$\%\^\&\*\(\)]+')
+english = re.compile('[a-zA-Z\~\!\s\@\#\$\%\^\&\*\(\)\t]+')
 known_punctuation = u'／（）、，。：「」…。'
 
 def contains_english(unicode_string):
@@ -23,8 +36,14 @@ def contains_english(unicode_string):
 
 def contains_latin(unicode_string):
   """Attempts to determine whether the string contains any non-Asian scripts"""
-  string = unicode_string.encode("ascii", "ignore")
-  return contains_english(string)
+  length = len(unicode_string)
+  string = unicode_string.encode("ascii", "ignore") # this is not the best way to do it, since it throws away chinese characters
+  if len(string.strip()) > 0:
+    return contains_english(string)
+  elif length > 0:
+    return False
+  else:
+    return True
 
 
 def is_punctuation(word):
@@ -56,25 +75,21 @@ def is_simplified(text):
   Determine whether a text is simplified Chinese
   Returns True if written in Simplified, False otherwise.
 
-  Note: This assumes the text is known to be one or the other.
+  Note: This sort-of assumes the text is known to be one or the other 
+  (i.e. no guarantees on the behaviour if it isn't)
   """
-
-  # TODO: Write a nice(r) wrapper for iconv
-
-  print "big5 - 1"
-  test1 = iconv(text, args=['-f', "UTF-8", '-t', "big5//TRANSLIT", "-s", "-c"])
-  print "big5 - 2"
-  test2 = iconv(text, args=['-f', "UTF-8", '-t', "big5//IGNORE", "-s", "-c"])
-
-  if test1 == test2:
-     return False
-  else:
-     test3 = iconv(text, args=["-f", "UTF-8", "-t", "gb18030//TRANSLIT", "-s", "-c"])
-     test4 = iconv(text, args=["-f", "UTF-8", "-t", "gb18030//IGNORE", "-s", "-c"])
-     if test3 == test4:
-        return True
-     else:
-        return None
+  s = simplify(text)
+  t = tradify(text)
+  if s == text and t == text: 
+    # This either means it's both, or none.
+    # How can we test more precisely? Maybe a scale from 0 to 1.0?
+    # Or simply differentiate between "both" and "neither"?
+    return None
+  if s == text:
+    return True
+  if t == text:
+    return False
+  return None
 
 
 def is_traditional(text):
@@ -89,3 +104,56 @@ def is_traditional(text):
     return None
   else: 
     return not simp
+
+
+def _is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
+def split_text(text, include_part_of_speech=False, strip_english=False, strip_numbers=False):
+  """
+  Split Chinese text at word boundaries.
+
+  include_pos: also returns the Part Of Speech for each of the words.
+  Some of the different parts of speech are:
+    r: pronoun
+    v: verb
+    ns: proper noun
+    etc...
+
+  This all gets returned as a tuple:
+    index 0: the split word
+    index 1: the word's part of speech
+
+  strip_english: remove all entries that have English or numbers in them (useful sometimes)
+  """
+  # was_traditional = is_traditional(text)
+  # string = text
+
+  # if was_traditional:
+  #   string = simplify(string)
+
+  if not include_part_of_speech:
+    seg_list = jieba.cut_for_search(text)
+    if strip_english:
+      seg_list = filter(lambda x: not contains_english(x), seg_list)
+    if strip_numbers:
+      seg_list = filter(lambda x: not _is_number(x), seg_list)
+    return list(seg_list)
+  else:
+    seg_list = pseg.cut(text)
+    objs = map(lambda w: (w.word, w.flag), seg_list)
+    if strip_english:
+      objs = filter(lambda x: not contains_english(x[0]), objs)
+    if strip_english:
+      objs = filter(lambda x: not _is_number(x[0]), objs)
+    return objs
+
+  # if was_traditional:
+  #   seg_list = map(tradify, seg_list)
+
+  return list(seg_list)

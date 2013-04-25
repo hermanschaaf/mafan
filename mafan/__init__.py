@@ -1,1 +1,1 @@
-from text import tradify, simplify, to_traditional, to_simplified, is_simplified, is_traditional
+from text import tradify, simplify, to_traditional, to_simplified, is_simplified, is_traditional, split_text

@@ -11,7 +11,7 @@ import subprocess
 import logging
 import chardet
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.ERROR)
 
 def convert(filename, new_filename=None, overwrite=False, to_encoding='utf-8', force=True):
   """ Convert file with crappy encoding to a new proper encoding (or vice versa if you wish).
@@ -58,3 +58,21 @@ def convert(filename, new_filename=None, overwrite=False, to_encoding='utf-8', f
 
   return new_filename
 
+
+def detect(filename, include_confidence=False):
+  """
+  Detect the encoding of a file.
+
+  Returns only the predicted current encoding as a string.
+
+  If `include_confidence` is True, 
+  Returns tuple containing: (str encoding, float confidence)
+  """
+  f = open(filename)
+  detection = chardet.detect(f.read())
+  f.close()
+  encoding = detection.get('encoding')
+  confidence = detection.get('confidence')
+  if include_confidence:
+    return (encoding, confidence)
+  return encoding
