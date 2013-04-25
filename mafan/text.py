@@ -11,6 +11,8 @@ import jieba
 import jieba.posseg as pseg
 import settings
 
+import hanzidentifier
+
 if settings.TRADITIONAL_DICT:
   print "Using traditional dictionary..."
   _curpath=os.path.normpath( os.path.join( os.getcwd(), os.path.dirname(__file__) )  )
@@ -69,28 +71,28 @@ def iconv(text, args):
   print output
   return output
 
+def identify(text):
+  """
+  Wrapper for hanzidentifier identify function
+
+  Returns:
+    None: if there are no recognizd Chinese characters.
+    EITHER: if the test is inconclusive.
+    TRAD: if the text is traditional.
+    SIMP: if the text is simplified.
+    BOTH: the text has characters recognized as being solely traditional
+        and other characters recognized as being solely simplified.
+  """
+  return hanzidentifier.identify(text)
 
 def is_simplified(text):
   """
   Determine whether a text is simplified Chinese
   Returns True if written in Simplified, False otherwise.
 
-  Note: This sort-of assumes the text is known to be one or the other 
-  (i.e. no guarantees on the behaviour if it isn't)
+  Note: This assumes the text is known to be one or the other.
   """
-  s = simplify(text)
-  t = tradify(text)
-  if s == text and t == text: 
-    # This either means it's both, or none.
-    # How can we test more precisely? Maybe a scale from 0 to 1.0?
-    # Or simply differentiate between "both" and "neither"?
-    return None
-  if s == text:
-    return True
-  if t == text:
-    return False
-  return None
-
+  return hanzidentifier.identify(text) is hanzidentifier.SIMP
 
 def is_traditional(text):
   """
@@ -99,11 +101,7 @@ def is_traditional(text):
 
   Note: This assumes the text is known to be one or the other.
   """
-  simp = is_simplified(text)
-  if simp is None: 
-    return None
-  else: 
-    return not simp
+  return hanzidentifier.identify(text) is hanzidentifier.TRAD
 
 
 def _is_number(s):
