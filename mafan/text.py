@@ -11,7 +11,7 @@ import jieba
 import jieba.posseg as pseg
 import settings
 
-import hanzidentifier
+from hanzidentifier import hanzidentifier
 
 if settings.TRADITIONAL_DICT:
   print "Using traditional dictionary..."
