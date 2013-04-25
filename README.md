@@ -58,7 +58,8 @@ True
 
 You can also test whether sentences or documents use simplified characters, traditional characters, both or neither:
 
-```>>> import mafan
+```python
+    >>> import mafan
     >>> from mafan import text
     >>> text.is_simplified(u'这是麻烦啦')
     True
