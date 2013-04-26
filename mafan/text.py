@@ -26,7 +26,7 @@ to_traditional = tradify
 to_simplified = simplify
 
 english = re.compile('[a-zA-Z\~\!\s\@\#\$\%\^\&\*\(\)\t]+')
-known_punctuation = u'／（）、，。：「」…。'
+known_punctuation = u'／（）、，。：「」…。『』！？《》'
 
 def contains_english(unicode_string):
   """Attempts to determine whether the string contains any of the common English characters."""
@@ -48,19 +48,14 @@ def contains_latin(unicode_string):
     return True
 
 
-def is_punctuation(word):
-  """
-  Check if a string is among any of the common Chinese punctuation marks.
-  """
-  return word in known_punctuation
-
-
 def has_punctuation(word):
   """
   Check if a string has any of the common Chinese punctuation marks.
   """
-  # this could be more efficient
-  return any(is_punctuation(c) for c in word)
+  if re.search(r'[%s]' % known_punctuation, word) is not None:
+      return True
+  else:
+      return False
 
 
 def iconv(text, args):
