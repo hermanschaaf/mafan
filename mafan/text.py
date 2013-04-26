@@ -26,7 +26,7 @@ to_traditional = tradify
 to_simplified = simplify
 
 english = re.compile('[a-zA-Z\~\!\s\@\#\$\%\^\&\*\(\)\t]+')
-known_punctuation = u'／（）、，。：「」…。'
+known_punctuation = u'／（）、，。：「」…。『』！？《》'
 
 def contains_english(unicode_string):
   """Attempts to determine whether the string contains any of the common English characters."""
