@@ -30,31 +30,40 @@ class TestIdentifyFunction(unittest.TestCase):
         self.assertEqual(simplify(tradify(st2)), st2)
 
 class TestContainsAsciiFunction(unittest.TestCase):
+    
+    def generate_random_text(self, start, stop, length):
+        """Generates a random string of unicode values between start and stop.
+
+        Parameters:
+            start: integer value corresponding to a unicode code point
+            stop: integer value corresponding to a unicode code point
+            length: the target length of the generated string
+
+        """
+        text = ''
+        for n in range(1, length):
+            text += unichr(random.randint(start, stop))
+        return text
 
     def test_chinese_only(self):
-        text = ''
-        for n in range(0,20):
-            text += unichr(random.randint(19968, 40959))
+        text = self.generate_random_text(19968, 40959, 20)
         self.assertFalse(contains_ascii(text))
 
     def test_printable_ascii_only(self):
-        text = ''
-        for n in range(0,20):
-            text += unichr(random.randint(32, 126))
+        text = self.generate_random_text(32, 126, 20)
         self.assertTrue(contains_ascii(text))
 
     def test_non_printable_ascii_only(self):
-        text = ''
-        for n in range(0,20):
-            text += unichr(random.randint(0, 31))
+        text = self.generate_random_text(0, 31, 20)
         self.assertFalse(contains_ascii(text))
 
     def test_chinese_and_ascii(self):
-        text = ''
-        for n in range(0,20):
-            text += unichr(random.randint(32, 126))
-            text += unichr(random.randint(19968, 40959))
+        text = self.generate_random_text(32, 126, 20)
+        text += self.generate_random_text(19968, 40959, 20)
         self.assertTrue(contains_ascii(text))
+
+    def test_empty_string(self):
+        self.assertFalse(contains_ascii(''))
 
 if __name__ == '__main__':
     unittest.main()
