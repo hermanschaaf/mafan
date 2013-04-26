@@ -10,6 +10,7 @@ The way to run this right now is to make your current directory the parent of th
 This places the mafan package on the relative path of this file.
 """
 
+import random
 import unittest
 
 from ..text import *
@@ -27,6 +28,33 @@ class TestIdentifyFunction(unittest.TestCase):
 
     def test_simplify_and_tradify(self):
         self.assertEqual(simplify(tradify(st2)), st2)
+
+class TestContainsAsciiFunction(unittest.TestCase):
+
+    def test_chinese_only(self):
+        text = ''
+        for n in range(0,20):
+            text += unichr(random.randint(19968, 40959))
+        self.assertFalse(contains_ascii(text))
+
+    def test_printable_ascii_only(self):
+        text = ''
+        for n in range(0,20):
+            text += unichr(random.randint(32, 126))
+        self.assertTrue(contains_ascii(text))
+
+    def test_non_printable_ascii_only(self):
+        text = ''
+        for n in range(0,20):
+            text += unichr(random.randint(0, 31))
+        self.assertFalse(contains_ascii(text))
+
+    def test_chinese_and_ascii(self):
+        text = ''
+        for n in range(0,20):
+            text += unichr(random.randint(32, 126))
+            text += unichr(random.randint(19968, 40959))
+        self.assertTrue(contains_ascii(text))
 
 if __name__ == '__main__':
     unittest.main()

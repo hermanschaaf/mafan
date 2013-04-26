@@ -25,27 +25,21 @@ from jianfan import jtof as tradify, ftoj as simplify
 to_traditional = tradify
 to_simplified = simplify
 
-english = re.compile('[a-zA-Z\~\!\s\@\#\$\%\^\&\*\(\)\t]+')
 known_punctuation = u'／（）、，。：「」…。『』！？《》'
 
-def contains_english(unicode_string):
-  """Attempts to determine whether the string contains any of the common English characters."""
+def contains_ascii(unicode_string):
+  """Attempts to determine whether the string contains any ASCII characters.
   
-  if english.search(unicode_string):
-    return True
-  return False
+  Checks for any printable ASCII characters (0020-007E).
 
+  It does not check for non-printable ASCII characters such as tabs and spaces,
+    because those are often present in Chinese typing as well.
 
-def contains_latin(unicode_string):
-  """Attempts to determine whether the string contains any non-Asian scripts"""
-  length = len(unicode_string)
-  string = unicode_string.encode("ascii", "ignore") # this is not the best way to do it, since it throws away chinese characters
-  if len(string.strip()) > 0:
-    return contains_english(string)
-  elif length > 0:
-    return False
+  """
+  if re.search(ur'[\u0020-\u007E]', unicode_string) is None:
+      return False
   else:
-    return True
+      return True
 
 
 def has_punctuation(word):
