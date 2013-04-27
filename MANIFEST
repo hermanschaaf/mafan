@@ -6,6 +6,12 @@ setup.py
 bin/convert.py
 docs/README.md
 mafan/__init__.py
+mafan/download_data.py
 mafan/encoding.py
 mafan/pinyin.py
+mafan/settings.py
 mafan/text.py
+mafan/hanzidentifier/__init__.py
+mafan/hanzidentifier/data.py
+mafan/hanzidentifier/hanzidentifier.py
+mafan/hanzidentifier/test.py

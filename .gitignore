@@ -50,3 +50,5 @@ lib64
 Icon?
 ehthumbs.db
 Thumbs.db
+
+.pypirc
