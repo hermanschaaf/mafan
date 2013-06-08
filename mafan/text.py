@@ -28,7 +28,7 @@ to_traditional = tradify
 to_simplified = simplify
 
 known_stops = u'。。…！？'
-known_punctuation = u'／（）、，。：「」…。『』！？《》'
+known_punctuation = u'／（）、，。：「」…。『』！？《》“”'
 
 re_split_sentences = re.compile(r"[%s]+" % known_stops)
 

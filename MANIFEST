@@ -6,6 +6,7 @@ setup.py
 bin/convert.py
 docs/README.md
 mafan/__init__.py
+mafan/constants.py
 mafan/download_data.py
 mafan/encoding.py
 mafan/pinyin.py
