@@ -1,4 +1,22 @@
-from distutils.core import setup
+from setuptools import setup
+from distutils.core import Command
+import os
+import sys
+
+class TestCommand(Command):
+    description = "Run tests"
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        import subprocess
+        errno = subprocess.call(['nosetests', '--debug=DEBUG', '-s'])
+        raise SystemExit(errno)
 
 setup(
     name='mafan',
@@ -11,6 +29,9 @@ setup(
     license='LICENSE.txt',
     description='A toolbox for working with the Chinese language in Python',
     long_description=open('docs/README.md').read(),
+    cmdclass={
+        'test': TestCommand,
+    },
     install_requires=[
         "jieba == 0.29",
         "argparse == 1.2.1",
