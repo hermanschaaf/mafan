@@ -15,13 +15,18 @@ from constants import SIMPLIFIED, TRADITIONAL, EITHER, BOTH, NEITHER
 
 from hanzidentifier import hanzidentifier
 
-if settings.TRADITIONAL_DICT:
-    print "Using traditional dictionary..."
-    _curpath=os.path.normpath( os.path.join( os.getcwd(), os.path.dirname(__file__) )  )
-    if os.path.exists(os.path.join(_curpath, 'data/dict.txt.big')):
-        jieba.set_dictionary('data/dict.txt.big')
-    else:
-        print "Warning: TRADITIONAL_DICT is enabled in settings, but the dictionary has not yet been downloaded. \n\nYou might want to try running download_data.py"
+_curpath=os.path.normpath( os.path.join( os.getcwd(), os.path.dirname(__file__) ))
+settings_path = os.environ.get('MAFAN_DICTIONARY_PATH')
+if settings_path and os.path.exists(settings_path):
+    jieba.set_dictionary(settings_path)
+elif os.path.exists(os.path.join(_curpath, 'data/dict.txt.big')):
+    jieba.set_dictionary('data/dict.txt.big')
+else:
+    try:
+        import mafan_traditional
+        jieba.set_dictionary(mafan_traditional.path)
+    except ImportError:
+        pass
 
 from jianfan import jtof as tradify, ftoj as simplify
 to_traditional = tradify
