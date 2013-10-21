@@ -79,6 +79,23 @@ True
 
 The identification functionality is introduced as a very thin wrapper to Thomas Roten's [hanzidentifier](https://github.com/tsroten/hanzidentifier), which is included as part of mafan.
 
+Another function that comes pre-built into Mafan is `split_text`, which tokenizes Chinese sentences into words:
+
+```python
+>>> from mafan import split_text
+>>> split_text(u"這是麻煩啦")
+[u'\u9019\u662f', u'\u9ebb\u7169', u'\u5566']
+>>> print ' '.join(split_text(u"這是麻煩啦"))
+這是 麻煩 啦
+```
+
+You can also optionally pass the boolean `include_part_of_speech` parameter to get tagged words back:
+
+```python
+>>> split_text(u"這是麻煩啦", include_part_of_speech=True)
+[(u'\u9019', 'r'), (u'\u662f', 'v'), (u'\u9ebb\u7169', 'x'), (u'\u5566', 'y')]
+```
+
 pinyin
 ===========
 
