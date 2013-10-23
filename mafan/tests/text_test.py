@@ -65,5 +65,9 @@ class TestContainsAsciiFunction(unittest.TestCase):
     def test_empty_string(self):
         self.assertFalse(contains_ascii(''))
 
+class TestSplitTextFunction(unittest.TestCase):
+    def test_basic_functionality(self):
+        self.assertEqual(split_text(u"這是麻煩啦"), [u'這', u'是', u'麻煩', u'啦'])
+
 if __name__ == '__main__':
     unittest.main()
