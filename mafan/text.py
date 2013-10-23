@@ -25,6 +25,7 @@ else:
     try:
         import mafan_traditional
         jieba.set_dictionary(mafan_traditional.path)
+        print "Using traditional dictionary!"
     except ImportError:
         pass
 
@@ -205,15 +206,14 @@ def split_text(text, include_part_of_speech=False, strip_english=False, strip_nu
 
     strip_english: remove all entries that have English or numbers in them (useful sometimes)
     """
-    # :TODO: Write doctests! Important!
 
     if not include_part_of_speech:
-        seg_list = jieba.cut_for_search(text)
+        seg_list = pseg.cut(text)
         if strip_english:
             seg_list = filter(lambda x: not contains_english(x), seg_list)
         if strip_numbers:
             seg_list = filter(lambda x: not _is_number(x), seg_list)
-        return list(seg_list)
+        return list(map(lambda i: i.word, seg_list))
     else:
         seg_list = pseg.cut(text)
         objs = map(lambda w: (w.word, w.flag), seg_list)
