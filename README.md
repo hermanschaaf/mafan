@@ -110,6 +110,11 @@ nǐhǎo
 settings
 ===========
 
+If you want to be able to use `split_text` on traditional characters, you can make use of one of two options:  
+
+ - Either set an environment variable, `MAFAN_DICTIONARY_PATH`, to the absolute path to a local copy of this [dictionary file](https://github.com/fxsjy/jieba/raw/master/extra_dict/dict.txt.big),
+ - or install the `mafan_traditional` convenience package: `pip install mafan_traditional`. If this package is installed and available, mafan will default to use this extended dictionary file. 
+
 Contributors:
 -----------
  * Herman Schaaf ([IronZebra.com](http://www.ironzebra.com)) (Author)
