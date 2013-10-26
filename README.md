@@ -107,7 +107,7 @@ pinyin
 nǐhǎo
 ```
 
-settings
+traditional characters
 ===========
 
 If you want to be able to use `split_text` on traditional characters, you can make use of one of two options:  
