@@ -84,9 +84,9 @@ Another function that comes pre-built into Mafan is `split_text`, which tokenize
 ```python
 >>> from mafan import split_text
 >>> split_text(u"這是麻煩啦")
-[u'\u9019\u662f', u'\u9ebb\u7169', u'\u5566']
+[u'\u9019', u'\u662f', u'\u9ebb\u7169', u'\u5566']
 >>> print ' '.join(split_text(u"這是麻煩啦"))
-這是 麻煩 啦
+這 是 麻煩 啦
 ```
 
 You can also optionally pass the boolean `include_part_of_speech` parameter to get tagged words back:
