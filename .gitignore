@@ -1,7 +1,6 @@
 *.pyc
 *.pyo
 .installed.cfg
-bin
 build
 mafan.egg-info
 develop-eggs
