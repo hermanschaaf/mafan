@@ -84,9 +84,9 @@ Another function that comes pre-built into Mafan is `split_text`, which tokenize
 ```python
 >>> from mafan import split_text
 >>> split_text(u"這是麻煩啦")
-[u'\u9019\u662f', u'\u9ebb\u7169', u'\u5566']
+[u'\u9019', u'\u662f', u'\u9ebb\u7169', u'\u5566']
 >>> print ' '.join(split_text(u"這是麻煩啦"))
-這是 麻煩 啦
+這 是 麻煩 啦
 ```
 
 You can also optionally pass the boolean `include_part_of_speech` parameter to get tagged words back:
@@ -107,8 +107,13 @@ pinyin
 nǐhǎo
 ```
 
-settings
+traditional characters
 ===========
+
+If you want to be able to use `split_text` on traditional characters, you can make use of one of two options:  
+
+ - Either set an environment variable, `MAFAN_DICTIONARY_PATH`, to the absolute path to a local copy of this [dictionary file](https://github.com/fxsjy/jieba/raw/master/extra_dict/dict.txt.big),
+ - or install the `mafan_traditional` convenience package: `pip install mafan_traditional`. If this package is installed and available, mafan will default to use this extended dictionary file. 
 
 Contributors:
 -----------
