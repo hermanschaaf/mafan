@@ -73,10 +73,12 @@ def contains_english(unicode_string):
 
 def contains_chinese(unicode_string):
     u"""
-    Add new method for checking chinese characters by given unicode string.
+    Check whether the given unicode string contains any chinese characters.
     >>> contains_chinese(u'Hello,這是麻煩啦')
     True
     >>> contains_chinese(u'Hello')
+    False
+    >>> contains_chinese(u'。…！？') # punctuation does not count as Chinese
     False
     """
     if re.search(ur'[\u4E00-\u9FFF]+', unicode_string) is None:
