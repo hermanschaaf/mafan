@@ -9,7 +9,6 @@ from HTMLParser import HTMLParser
 
 import jieba
 import jieba.posseg as pseg
-import settings
 
 from constants import SIMPLIFIED, TRADITIONAL, EITHER, BOTH, NEITHER
 
