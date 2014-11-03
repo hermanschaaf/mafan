@@ -40,7 +40,7 @@ re_split_sentences = re.compile(r"[%s]+" % known_stops)
 
 def contains_ascii(unicode_string):
     u"""Attempts to determine whether the string contains any ASCII characters.
-    
+
     Checks for any printable ASCII characters (0020-007E).
 
     It does not check for non-printable ASCII characters such as tabs and spaces,
@@ -56,7 +56,7 @@ def contains_ascii(unicode_string):
 
 def contains_latin(unicode_string):
     u"""
-    Kept for backwards-compatibility. 
+    Kept for backwards-compatibility.
 
     :TODO: Improve this to also look for characters
     such as ô,ê,ā,ɛ, etc.
@@ -66,10 +66,25 @@ def contains_latin(unicode_string):
 
 def contains_english(unicode_string):
     u"""
-    Kept for backwards-compatibility. 
+    Kept for backwards-compatibility.
     Just a wrapper for contains_ascii
     """
     return contains_ascii(unicode_string)
+
+def contains_chinese(unicode_string):
+    u"""
+    Check whether the given unicode string contains any chinese characters.
+    >>> contains_chinese(u'Hello,這是麻煩啦')
+    True
+    >>> contains_chinese(u'Hello')
+    False
+    >>> contains_chinese(u'。…！？') # punctuation does not count as Chinese
+    False
+    """
+    if re.search(ur'[\u4E00-\u9FFF]+', unicode_string) is None:
+        return False
+    else:
+        return True
 
 
 def has_punctuation(word):
@@ -167,7 +182,7 @@ def is_traditional(text):
 def is_chinese(text):
     u"""
     Determine whether the entire string contains only Chinese characters.
-    This checks every character, so it is pretty slow - try to use only on 
+    This checks every character, so it is pretty slow - try to use only on
     short sentences or words.
 
     >>> is_chinese(u'這是麻煩啦')
