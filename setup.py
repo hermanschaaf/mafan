@@ -20,7 +20,7 @@ class TestCommand(Command):
 
 setup(
     name='mafan',
-    version='0.2.5',
+    version='0.2.6',
     author='Herman Schaaf',
     author_email='herman@ironzebra.com',
     packages=['mafan', 'mafan.hanzidentifier'],
