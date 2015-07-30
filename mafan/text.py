@@ -14,7 +14,7 @@ from constants import SIMPLIFIED, TRADITIONAL, EITHER, BOTH, NEITHER
 
 from hanzidentifier import hanzidentifier
 
-_curpath=os.path.normpath( os.path.join( os.getcwd(), os.path.dirname(__file__) ))
+_curpath = os.path.normpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 settings_path = os.environ.get('MAFAN_DICTIONARY_PATH')
 if settings_path and os.path.exists(settings_path):
     jieba.set_dictionary(settings_path)
@@ -28,7 +28,7 @@ else:
     except ImportError:
         pass
 
-from jianfan import jtof as tradify, ftoj as simplify
+from third_party.jianfan import jtof as tradify, ftoj as simplify
 to_traditional = tradify
 to_simplified = simplify
 
@@ -49,9 +49,9 @@ def contains_ascii(unicode_string):
     :TODO: Tests
     """
     if re.search(ur'[\u0020-\u007E]', unicode_string) is None:
-            return False
+        return False
     else:
-            return True
+        return True
 
 
 def contains_latin(unicode_string):
@@ -70,6 +70,7 @@ def contains_english(unicode_string):
     Just a wrapper for contains_ascii
     """
     return contains_ascii(unicode_string)
+
 
 def contains_chinese(unicode_string):
     u"""
@@ -92,9 +93,9 @@ def has_punctuation(word):
     Check if a string has any of the common Chinese punctuation marks.
     """
     if re.search(r'[%s]' % known_punctuation, word) is not None:
-            return True
+        return True
     else:
-            return False
+        return False
 
 
 def is_punctuation(character):
@@ -119,7 +120,7 @@ def is_punctuation(character):
 
 def iconv(text, args):
     p1 = subprocess.Popen(["echo", text], stdout=subprocess.PIPE)
-    p2 = subprocess.Popen(['iconv'] + list(args), stdout=subprocess.PIPE, stdin = p1.stdout, stderr=subprocess.STDOUT)
+    p2 = subprocess.Popen(['iconv'] + list(args), stdout=subprocess.PIPE, stdin=p1.stdout, stderr=subprocess.STDOUT)
     p1.stdout.close()
     output = p2.communicate()[0]
     print output
@@ -256,5 +257,5 @@ def split_sentences(text):
 
 
 if __name__ == "__main__":
-        import doctest
-        doctest.testmod()
+    import doctest
+    doctest.testmod()

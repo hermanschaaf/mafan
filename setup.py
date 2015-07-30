@@ -3,6 +3,7 @@ from distutils.core import Command
 import os
 import sys
 
+
 class TestCommand(Command):
     description = "Run tests"
     user_options = []
@@ -20,7 +21,7 @@ class TestCommand(Command):
 
 setup(
     name='mafan',
-    version='0.2.6',
+    version='0.2.7',
     author='Herman Schaaf',
     author_email='herman@ironzebra.com',
     packages=['mafan', 'mafan.hanzidentifier'],
@@ -37,6 +38,5 @@ setup(
         "argparse == 1.1",
         "chardet == 2.1.1",
         "wsgiref == 0.1.2",
-        "jianfan == 0.0.1",
     ],
 )
