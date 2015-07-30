@@ -21,10 +21,15 @@ class TestCommand(Command):
 
 setup(
     name='mafan',
-    version='0.2.7',
+    version='0.2.10',
     author='Herman Schaaf',
     author_email='herman@ironzebra.com',
-    packages=['mafan', 'mafan.hanzidentifier'],
+    packages=[
+        'mafan',
+        'mafan.hanzidentifier',
+        'mafan.third_party',
+        'mafan.third_party.jianfan'
+    ],
     scripts=['bin/convert.py'],
     url='https://github.com/hermanschaaf/mafan',
     license='LICENSE.txt',
