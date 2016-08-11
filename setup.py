@@ -42,6 +42,5 @@ setup(
         "jieba == 0.29",
         "argparse == 1.1",
         "chardet == 2.1.1",
-        "wsgiref == 0.1.2",
     ],
 )
