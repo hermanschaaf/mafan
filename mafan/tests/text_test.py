@@ -1,4 +1,4 @@
-#encoding=utf-8
+# encoding=utf-8
 """
 Just some super-basic tests to see that everything is working as expected.
 We should extend this to something more comprehensive soon.
@@ -12,11 +12,13 @@ This places the mafan package on the relative path of this file.
 
 import random
 import unittest
+from six import unichr
 
 from ..text import *
 
 st = u"聲音鳥樹葉話説話細又輕蝴蝶請只有和得聼得到蜜蜂"
 st2 = u'这是麻烦啦'
+
 
 class TestIdentifyFunction(unittest.TestCase):
 
@@ -29,8 +31,9 @@ class TestIdentifyFunction(unittest.TestCase):
     def test_simplify_and_tradify(self):
         self.assertEqual(simplify(tradify(st2)), st2)
 
+
 class TestContainsAsciiFunction(unittest.TestCase):
-    
+
     def generate_random_text(self, start, stop, length):
         """Generates a random string of unicode values between start and stop.
 
@@ -42,7 +45,7 @@ class TestContainsAsciiFunction(unittest.TestCase):
         """
         text = ''
         for n in range(1, length):
-            text += chr(random.randint(start, stop))
+            text += unichr(random.randint(start, stop))
         return text
 
     def test_chinese_only(self):
@@ -65,7 +68,9 @@ class TestContainsAsciiFunction(unittest.TestCase):
     def test_empty_string(self):
         self.assertFalse(contains_ascii(''))
 
+
 class TestSplitTextFunction(unittest.TestCase):
+
     def test_basic_functionality(self):
         self.assertEqual(split_text(u"這是麻煩啦"), [u'這', u'是', u'麻煩', u'啦'])
 
