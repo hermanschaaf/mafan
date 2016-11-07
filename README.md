@@ -121,6 +121,8 @@ Contributors:
 -----------
  * Herman Schaaf ([IronZebra.com](http://www.ironzebra.com)) (Author)
  * Thomas Roten ([Github](https://github.com/tsroten/))
+ * [JOEWONGLVFS](https://github.com/JOEWONGLVFS)
+ * Casper CY Chiang ([Github](https://github.com/cychiang))
 
 Any contributions are very welcome! 
 
