@@ -45,7 +45,7 @@ def _t(unistr, charset_from, charset_to):
 
 
 def jtof(unicode_string):
-    """
+    u"""
         Translate simplified chinese to traditional chinese.
         >>> s = u'中华'
         >>> print jtof(s)
@@ -54,7 +54,7 @@ def jtof(unicode_string):
     return _t(unicode_string, gbk, big5)
 
 def ftoj(unicode_string):
-    """
+    u"""
         Translate traditional chinese to simplified chinese.
         >>> t = u'中華'
         >>> print ftoj(t)
