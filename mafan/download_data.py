@@ -5,6 +5,10 @@ files for use with Mafan, if you would find it necessary.
 These files can be rather large, so they don't come with the 
 default mafan distribution.
 """
+
+from future.standard_library import install_aliases
+install_aliases()
+
 import os
 from urllib.request import Request, urlopen, urlsplit
 
