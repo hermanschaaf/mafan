@@ -42,7 +42,7 @@ class TestContainsAsciiFunction(unittest.TestCase):
         """
         text = ''
         for n in range(1, length):
-            text += unichr(random.randint(start, stop))
+            text += chr(random.randint(start, stop))
         return text
 
     def test_chinese_only(self):
