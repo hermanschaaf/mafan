@@ -106,7 +106,7 @@ def is_punctuation(character):
     This is useful for filtering out punctuation, for example.
 
     >>> sentence = u"你的電子郵件信箱「爆」了！無法寄信給你。"
-    >>> print(filter(lambda c: not is_punctuation(c), sentence))
+    >>> print("".join(filter(lambda c: not is_punctuation(c), sentence)))
     你的電子郵件信箱爆了無法寄信給你
 
     >>> word = u"『爆』？"
