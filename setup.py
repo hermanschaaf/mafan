@@ -21,7 +21,7 @@ class TestCommand(Command):
 
 setup(
     name='mafan',
-    version='0.2.10',
+    version='0.3.0',
     author='Herman Schaaf',
     author_email='herman@ironzebra.com',
     packages=[
@@ -39,9 +39,9 @@ setup(
         'test': TestCommand,
     },
     install_requires=[
-        "jieba == 0.29",
+        "jieba == 0.37",
         "argparse == 1.1",
         "chardet == 2.1.1",
-        "wsgiref == 0.1.2",
+        "future",
     ],
 )

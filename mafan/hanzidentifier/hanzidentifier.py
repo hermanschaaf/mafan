@@ -20,15 +20,16 @@ Functions:
 
 """
 
-import data
+from .data import TRAD as data_TRAD
+from .data import SIMP as data_SIMP
 
 TRAD = 0
 SIMP = 1
 EITHER = 2
 BOTH = 3
 
-TRAD_CHARS = set(list(data.TRAD))
-SIMP_CHARS = set(list(data.SIMP))
+TRAD_CHARS = set(list(data_TRAD))
+SIMP_CHARS = set(list(data_SIMP))
 
 SHARED_CHARS = TRAD_CHARS.intersection(SIMP_CHARS)
 ALL_CHARS = TRAD_CHARS.union(SIMP_CHARS)

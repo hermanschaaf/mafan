@@ -2,17 +2,19 @@
 """
 Some helpful functions for parsing or changing Chinese text
 """
+from __future__ import print_function, unicode_literals
+
 import re
 import os
 import subprocess
-from HTMLParser import HTMLParser
 
 import jieba
 import jieba.posseg as pseg
 
-from constants import SIMPLIFIED, TRADITIONAL, EITHER, BOTH, NEITHER
+from .constants import SIMPLIFIED, TRADITIONAL, EITHER, BOTH, NEITHER
 
-from hanzidentifier import hanzidentifier
+from .hanzidentifier import hanzidentifier
+from .third_party.jianfan import jtof as tradify, ftoj as simplify
 
 _curpath = os.path.normpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 settings_path = os.environ.get('MAFAN_DICTIONARY_PATH')
@@ -24,11 +26,11 @@ else:
     try:
         import mafan_traditional
         jieba.set_dictionary(mafan_traditional.path)
-        print "Using traditional dictionary!"
+        print("Using traditional dictionary!")
     except ImportError:
         pass
 
-from third_party.jianfan import jtof as tradify, ftoj as simplify
+
 to_traditional = tradify
 to_simplified = simplify
 
@@ -48,7 +50,7 @@ def contains_ascii(unicode_string):
 
     :TODO: Tests
     """
-    if re.search(ur'[\u0020-\u007E]', unicode_string) is None:
+    if re.search(r'[\u0020-\u007E]', unicode_string) is None:
         return False
     else:
         return True
@@ -82,7 +84,7 @@ def contains_chinese(unicode_string):
     >>> contains_chinese(u'。…！？') # punctuation does not count as Chinese
     False
     """
-    if re.search(ur'[\u4E00-\u9FFF]+', unicode_string) is None:
+    if re.search(r'[\u4E00-\u9FFF]+', unicode_string) is None:
         return False
     else:
         return True
@@ -104,7 +106,7 @@ def is_punctuation(character):
     This is useful for filtering out punctuation, for example.
 
     >>> sentence = u"你的電子郵件信箱「爆」了！無法寄信給你。"
-    >>> print filter(lambda c: not is_punctuation(c), sentence)
+    >>> print("".join(filter(lambda c: not is_punctuation(c), sentence)))
     你的電子郵件信箱爆了無法寄信給你
 
     >>> word = u"『爆』？"
@@ -123,7 +125,7 @@ def iconv(text, args):
     p2 = subprocess.Popen(['iconv'] + list(args), stdout=subprocess.PIPE, stdin=p1.stdout, stderr=subprocess.STDOUT)
     p1.stdout.close()
     output = p2.communicate()[0]
-    print output
+    print(output)
     return output
 
 
@@ -249,10 +251,9 @@ def split_sentences(text):
     Split Chinese text into a list of sentences, separated by punctuation.
 
     >>> sentence = u"你的電子郵件信箱「爆」了！無法寄信給你。我知道，我正在刪除信件中。"
-    >>> print '_'.join(split_sentences(text=sentence))
+    >>> print('_'.join(split_sentences(text=sentence)))
     你的電子郵件信箱「爆」了_無法寄信給你_我知道，我正在刪除信件中
     """
-    s = list(text)
     return filter(None, re.split(re_split_sentences, text))
 
 
