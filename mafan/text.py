@@ -47,7 +47,7 @@ def contains_ascii(unicode_string):
 
     :TODO: Tests
     """
-    if re.search('[\u0020-\u007E]', unicode_string) is None:
+    if re.search(ur'[\u0020-\u007E]', unicode_string) is None:
         return False
     else:
         return True
@@ -81,7 +81,7 @@ def contains_chinese(unicode_string):
     >>> contains_chinese(u'。…！？') # punctuation does not count as Chinese
     False
     """
-    if re.search('[\u4E00-\u9FFF]+', unicode_string) is None:
+    if re.search(ur'[\u4E00-\u9FFF]+', unicode_string) is None:
         return False
     else:
         return True
@@ -91,7 +91,7 @@ def has_punctuation(word):
     u"""
     Check if a string has any of the common Chinese punctuation marks.
     """
-    if re.search(r'[%s]' % known_punctuation, word) is not None:
+    if re.search(ur'[%s]' % known_punctuation, word) is not None:
         return True
     else:
         return False
