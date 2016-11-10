@@ -2,6 +2,7 @@ from setuptools import setup
 from distutils.core import Command
 import os
 import sys
+import codecs
 
 
 class TestCommand(Command):
@@ -34,7 +35,7 @@ setup(
     url='https://github.com/hermanschaaf/mafan',
     license='LICENSE.txt',
     description='A toolbox for working with the Chinese language in Python',
-    long_description=open('docs/README.md').read(),
+    long_description=codecs.open('docs/README.md', 'r', 'utf-8').read(),
     cmdclass={
         'test': TestCommand,
     },
