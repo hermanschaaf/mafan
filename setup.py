@@ -22,7 +22,7 @@ class TestCommand(Command):
 
 setup(
     name='mafan',
-    version='0.3.0',
+    version='0.3.1',
     author='Herman Schaaf',
     author_email='herman@ironzebra.com',
     packages=[
