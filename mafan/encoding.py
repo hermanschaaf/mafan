@@ -48,11 +48,13 @@ def convert(filename, new_filename=None, overwrite=False, to_encoding='utf-8', f
             logging.warning('Stopping. Use force = True if you want to force the encoding.')
             return None
 
-    # command example: iconv -f gb18030 -t utf-8 chs.srt -o chs-utf8.srt
-    p = subprocess.Popen(['iconv', '-f', encoding, '-t', to_encoding + "//IGNORE", os.path.abspath(filename), '-o',
-                          os.path.abspath(new_filename)], shell=False, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
-                         stderr=subprocess.STDOUT)
-    retval = p.wait()
+    # command example: iconv -f gb18030 -t utf-8 chs.srt > chs-utf8.srt
+    # "iconv" does not support -o parameter now and use stdout to instead.
+    with open(new_filename, 'w') as output_file:
+        p = subprocess.Popen(['iconv', '-f', encoding, '-t', to_encoding + "//IGNORE", \
+                os.path.abspath(filename)], shell=False, \
+                stdout=output_file, stdin=subprocess.PIPE, stderr=subprocess.STDOUT)
+        retval = p.wait()
 
     if delete_original and os.path.isfile(new_filename):
         os.remove(filename)
