@@ -42,7 +42,7 @@ setup(
     install_requires=[
         "jieba == 0.37",
         "argparse == 1.1",
-        "chardet == 2.1.1",
+        "chardet >= 2.1.1",
         "future",
     ],
 )
